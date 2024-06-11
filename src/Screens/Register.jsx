@@ -1,8 +1,12 @@
 import React from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { useNavigation } from "@react-navigation/native";
+
 
 const Register = () => {
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
             <View style={styles.Logo}>
@@ -70,14 +74,14 @@ const Register = () => {
                     end={{ x: 1, y: 1 }}
                     style={styles.buttonSubmit}
                 >
-                    <TouchableOpacity style={styles.buttonSubmitInner}>
+                    <TouchableOpacity style={styles.buttonSubmitInner} onPress={() => navigation.navigate('Login')}>
                         <Text style={styles.buttonSubmitText}>Registrate</Text>
                     </TouchableOpacity>
                 </LinearGradient>
 
                 <Text style={styles.p}>
                     ¿Ya tienes una cuenta?{' '}
-                    <Text style={styles.span}>Inicia sesión</Text>
+                    <Text style={styles.span} onPress={() => navigation.navigate('Login')}>Inicia sesión</Text>
                 </Text>
                 </ScrollView>
             </View>

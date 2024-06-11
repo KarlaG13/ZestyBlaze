@@ -45,7 +45,7 @@ const Login = () => {
                     </TouchableOpacity>
                 </LinearGradient>
 
-                <Text style={styles.p}>
+                <Text style={styles.p} onPress={() => navigation.navigate('Register')}>
                     ¿No tienes una cuenta?{' '}
                     <Text style={styles.span}>Registrate</Text>
                 </Text>
