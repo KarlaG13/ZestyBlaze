@@ -1,10 +1,15 @@
 import React from 'react'
-import { View, StyleSheet, Text, Image } from 'react-native'
+import { View, StyleSheet, Text, Image, ScrollView } from 'react-native'
 import IconExit from 'react-native-vector-icons/MaterialIcons';
+import IconGrid from 'react-native-vector-icons/Fontisto';
+import Card from '../Components/Card';
+
 
 
 const Profile = () => {
     return (
+        <ScrollView contentContainerStyle={styles.containerInf} showsVerticalScrollIndicator={false}>
+
         <View style={styles.container}>
             <View style={styles.containerHeader} >
                 <View style={styles.Logo}>
@@ -13,25 +18,31 @@ const Profile = () => {
                 </View>
 
                 <View>
-                    <IconExit name="exit-to-app" size={30} color="blue" />
+                    <IconExit name="exit-to-app" size={30} color="#757575" />
                 </View>
 
             </View>
 
-            <View style={styles.containerDataProfile}>
-                <Image
-                    source={require('../assets/young.jpg')}
-                    style={styles.photoProfile}
-                />
-                <Text style={styles.nameProfile}>Ana García</Text>
-                <Text style={styles.userProfile}>@moonlight</Text>
-            </View>
+                <View style={styles.containerDataProfile}>
+                    <Image
+                        source={require('../assets/young.jpg')}
+                        style={styles.photoProfile}
+                    />
+                    <Text style={styles.nameProfile}>Ana García</Text>
+                    <Text style={styles.userProfile}>@moonlight</Text>
+                </View>
 
-            <View  style={styles.containerIconPublication}>
+                <View style={styles.containerIconPublication}>
+                    <IconGrid name="nav-icon-grid" size={30} color="#757575" />
+                </View>
+                <Card />
+                <Card />
+                <Card />
 
-            </View>
 
         </View>
+        </ScrollView>
+
     )
 }
 
@@ -56,27 +67,40 @@ const styles = StyleSheet.create({
         height: 50,
         marginRight: 10
     },
-    photoProfile:{
+    photoProfile: {
         width: 100,
         height: 100,
-        borderRadius:100
+        borderRadius: 100
     },
-    nameProfile:{
-        fontSize:24,
-        color:'black'
+    nameProfile: {
+        fontSize: 24,
+        color: 'black'
     },
-    userProfile:{
+    userProfile: {
 
     },
-    containerDataProfile:{
-        width:'100%',
-        alignItems:'center',
-        justifyContent:'center',
-        height:'40%'
+    containerDataProfile: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '20%'
     },
-    containerIconPublication:{
-        
-    }
+    containerIconPublication: {
+        borderBottomWidth: 1,
+        borderBottomColor: '#D9D9D9',
+        width: '100%',
+        borderTopWidth: 1,
+        borderTopColor: '#D9D9D9',
+        padding: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    containerInf: {
+           padding: 10,
+        backgroundColor: 'white',
+        marginBottom:50
+
+    },
 })
 
 
