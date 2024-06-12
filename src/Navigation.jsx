@@ -2,11 +2,15 @@ import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import IconUser from 'react-native-vector-icons/FontAwesome6';
 
+
+//Screens
 import Home from "./Screens/Home";
 import Login from "./Screens/Login";
 import Register from "./Screens/Register";
-// Importa otras pantallas aquí
+import Profile from "./Screens/Profile";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -32,7 +36,22 @@ function MainTab() {
                 component={Home}
                 options={{
                     tabBarLabel: () => null,
-                    headerShown: false
+                    tabBarIcon: () => (
+                        <Icon name="home" size={40} color="blue" />
+
+                    ), headerShown: false
+                }}
+            />
+
+            <Tab.Screen
+                name="Profile"
+                component={Profile}
+                options={{
+                    tabBarLabel: () => null,
+                    tabBarIcon: () => (
+                        <IconUser name="user-large" size={30} color="blue" />
+
+                    ), headerShown: false
                 }}
             />
         </Tab.Navigator>
