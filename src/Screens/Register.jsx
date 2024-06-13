@@ -108,8 +108,10 @@ const styles = StyleSheet.create({
         height: 700,
     },
     Logo: {
-        textAlign: 'center',
+           textAlign: 'center',
         justifyContent: 'center',
+        width:'100%',
+        alignItems:'center'
 
     },
     form: {

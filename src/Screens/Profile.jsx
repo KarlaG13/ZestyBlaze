@@ -10,18 +10,18 @@ const Profile = () => {
     return (
         <ScrollView contentContainerStyle={styles.containerInf} showsVerticalScrollIndicator={false}>
 
-        <View style={styles.container}>
-            <View style={styles.containerHeader} >
-                <View style={styles.Logo}>
-                    <Image source={require('../assets/Label.png')} style={styles.image} />
-                    <Text style={styles.texto}>ZestyBlaze</Text>
-                </View>
+            <View style={styles.container}>
+                <View style={styles.containerHeader} >
+                    <View style={styles.Logo}>
+                        <Image source={require('../assets/Label.png')} style={styles.image} />
+                        <Text style={styles.texto}>ZestyBlaze</Text>
+                    </View>
 
-                <View>
-                    <IconExit name="exit-to-app" size={30} color="#757575" />
-                </View>
+                    <View>
+                        <IconExit name="exit-to-app" size={30} color="#757575" />
+                    </View>
 
-            </View>
+                </View>
 
                 <View style={styles.containerDataProfile}>
                     <Image
@@ -40,7 +40,7 @@ const Profile = () => {
                 <Card />
 
 
-        </View>
+            </View>
         </ScrollView>
 
     )
@@ -96,9 +96,9 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     containerInf: {
-           padding: 10,
+        padding: 10,
         backgroundColor: 'white',
-        marginBottom:50
+        marginBottom: 50
 
     },
 })

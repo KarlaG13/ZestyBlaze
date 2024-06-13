@@ -20,10 +20,9 @@ const Publication = () => {
                     onChangeText={(text) => setText(text)}
                     value={text}
                 />
-
             </View>
 
-            <View>
+            <View style={styles.containerUpload} >
 
                 <Text>Subir foto/video/audio</Text>
                 <UploadButton />
@@ -46,6 +45,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
         padding: 10,
+        flexDirection:'column',
+        justifyContent:'space-evenly',
+        height:'100%'
     },
     textArea: {
         height: 150,
@@ -59,12 +61,23 @@ const styles = StyleSheet.create({
         textAlignVertical: 'top', 
     },
     containerTextArea: {
-        width: '100%'
+        width: '90%',
     },
     containerBtn:{
+        flex:1,
         flexDirection:'row',
         alignItems:'center',
-        justifyContent:'space-between'
+        justifyContent:'space-around',
+        width:'100%',
+
+    },
+    containerUpload:{
+
+        width:'100%',
+        justifyContent:'center',
+        alignItems:'center',
+
+        
     }
 })
 

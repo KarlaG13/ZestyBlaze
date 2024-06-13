@@ -67,6 +67,8 @@ const styles = StyleSheet.create({
     Logo: {
         textAlign: 'center',
         justifyContent: 'center',
+        width:'100%',
+        alignItems:'center'
 
     },
     form: {

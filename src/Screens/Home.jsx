@@ -10,16 +10,13 @@ const Home = () => {
                 <Image source={require('../assets/Label.png')} style={styles.image} />
                 <Text style={styles.texto}>ZestyBlaze</Text>
             </View>
-                <ScrollView contentContainerStyle={styles.containerInf} showsVerticalScrollIndicator={false}>
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-              
+            <ScrollView contentContainerStyle={styles.containerInf} showsVerticalScrollIndicator={false}>
+                <Card />
+               
 
 
-                </ScrollView>
+
+            </ScrollView>
 
 
 
@@ -31,11 +28,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 10,
-        backgroundColor:'white'
+        backgroundColor: 'white'
     },
     Logo: {
         flexDirection: 'row',
         alignItems: 'center',
+        borderBottomWidth: 0.6,
+        borderBottomColor: '#D9D9D9',
+    },
+    texto: {
+        color: 'black',
+        fontSize:15,
     },
     image: {
         width: 50,

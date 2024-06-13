@@ -16,9 +16,11 @@ const Card = (props) => {
                 />
                 <View style={styles.profileText}>
                     <Text style={styles.title}>Lucia</Text>
-                    <Text style={styles.description}>2 de mayo</Text>
+                    <Text style={styles.date}>2 de mayo</Text>
                 </View>
             </View>
+
+            <Text style={styles.description}  >Hello Everyone❤️</Text>
 
             <Image
                 source={require('../assets/planetario.jpg')} // Cambia la fuente según la imagen real
@@ -54,10 +56,15 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 18,
         fontWeight: 'bold',
+        color:'black'
     },
-    description: {
+    date: {
         fontSize: 14,
         color: '#888',
+    },
+    description:{
+        color:'black',
+        padding:3
     },
     publicationImage: {
         width: '100%',
