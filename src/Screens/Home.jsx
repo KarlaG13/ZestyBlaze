@@ -1,9 +1,16 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import Card from '../Components/Card';
-import Logo from '../Components/CustomCheckbox'
+import Logo from '../Components/CustomCheckbox';
+import { useUser } from '../ZestyBlaze/Core/Infrastructure/Context/UserContext';
 
 const Home = () => {
+    const { userId, logout } = useUser();
+
+    useEffect(() => {
+        console.log(userId);
+    }, []);
+
     return (
         <View style={styles.container} >
             <View style={styles.Logo} >

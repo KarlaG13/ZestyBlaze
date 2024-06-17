@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
-
-
+import { useEffect, useState } from 'react';
+import { logInUseCase } from '../ZestyBlaze/Core/Modules/Auth/Applications/LoginUseCase';
+import { useUser } from '../ZestyBlaze/Core/Infrastructure/Context/UserContext';
 
 const Login = () => {
     const navigation = useNavigation();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const inputRef = useRef(null);
+    const { login } = useUser();
+
+    const handleLogin = async () => {
+        const useCase = new logInUseCase()
+        const user = await useCase.execute(email, password);
+        console.log(user);
+        if (user.status == 'success') {
+            login(user.data.id)
+            navigation.navigate('Menu');
+        } else {
+            alert(user.message);
+        }
+    }
+
+    useEffect(() => {
+        inputRef.current && inputRef.current.focus();
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -18,19 +39,22 @@ const Login = () => {
                 <View style={styles.flexColumn}>
                     <Text style={styles.label}>Correo electrónico</Text>
                 </View>
-                <View style={styles.inputForm}>
+                <TouchableOpacity style={styles.inputForm} onPress={() => inputRef.current.focus()}>
                     <TextInput
-                        style={styles.input}
+                        ref={inputRef}
+                        style={[styles.input, { color: 'black' }]}  // Color de texto ajustado
                         keyboardType="email-address"
+                        onChangeText={(text) => setEmail(text)}
                     />
-                </View>
+                </TouchableOpacity>
                 <View style={styles.flexColumn}>
                     <Text style={styles.label}> Contraseña</Text>
                 </View>
                 <View style={styles.inputForm}>
                     <TextInput
-                        style={styles.input}
+                        style={[styles.input, { color: 'black' }]}  // Color de texto ajustado
                         secureTextEntry
+                        onChangeText={(text) => setPassword(text)}
                     />
                 </View>
 
@@ -40,14 +64,14 @@ const Login = () => {
                     end={{ x: 1, y: 1 }}
                     style={styles.buttonSubmit}
                 >
-                    <TouchableOpacity style={styles.buttonSubmitInner} onPress={() => navigation.navigate('Menu')}>
+                    <TouchableOpacity style={styles.buttonSubmitInner} onPress={() => handleLogin()}>
                         <Text style={styles.buttonSubmitText}>Iniciar sesión</Text>
                     </TouchableOpacity>
                 </LinearGradient>
 
                 <Text style={styles.p} onPress={() => navigation.navigate('Register')}>
                     ¿No tienes una cuenta?{' '}
-                    <Text style={styles.span}>Registrate</Text>
+                    <Text style={styles.span}>Regístrate</Text>
                 </Text>
 
             </View>
@@ -61,15 +85,13 @@ const styles = StyleSheet.create({
         padding: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor:'white'
-
+        backgroundColor: 'white'
     },
     Logo: {
         textAlign: 'center',
         justifyContent: 'center',
-        width:'100%',
-        alignItems:'center'
-
+        width: '100%',
+        alignItems: 'center'
     },
     form: {
         width: '100%',
@@ -82,7 +104,6 @@ const styles = StyleSheet.create({
         color: 'black',
         marginTop: 10
     },
-
     label: {
         color: '#151717',
         fontWeight: '600',
@@ -98,6 +119,7 @@ const styles = StyleSheet.create({
     },
     input: {
         marginLeft: 10,
+        flex: 1,
     },
     flexRow: {
         flexDirection: 'row',
@@ -134,7 +156,6 @@ const styles = StyleSheet.create({
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
-
     },
     buttonSubmitText: {
         color: 'white',

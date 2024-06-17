@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Heart from './Icon_Heart';
 
 const Card = (props) => {
-    const { title, description, img } = props;
+    const { title, description, img, date } = props;
 
     return (
         <View style={styles.container}>
@@ -15,15 +15,15 @@ const Card = (props) => {
                     resizeMode="cover"
                 />
                 <View style={styles.profileText}>
-                    <Text style={styles.title}>Lucia</Text>
-                    <Text style={styles.date}>2 de mayo</Text>
+                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.date}>{date}</Text>
                 </View>
             </View>
 
-            <Text style={styles.description}  >Hello Everyone❤️</Text>
+            <Text style={styles.description}  >{description}</Text>
 
             <Image
-                source={require('../assets/planetario.jpg')} // Cambia la fuente según la imagen real
+                source={img} // Cambia la fuente según la imagen real
                 style={styles.publicationImage}
             />
 

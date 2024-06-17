@@ -1,11 +1,44 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
+import { RegisterUseCase } from '../ZestyBlaze/Core/Modules/Auth/Applications/RegisterUseCase';
 
 
 const Register = () => {
     const navigation = useNavigation();
+    const inputRef = useRef(null);
+    const [email, setEmail] = useState('');
+    const [fullName, setFullName] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const useCase = new RegisterUseCase();
+
+    const handleRegister = async () => {
+        if (!email || !fullName || !username || !password || !confirmPassword) {
+            alert('Por favor, completa todos los campos.');
+            return;
+        }
+    
+        if (password !== confirmPassword) {
+            alert('Las contraseñas no coinciden.');
+            return;
+        }
+
+        let response = await useCase.execute(fullName, email, password, username);
+        if (response.status === 'success') {
+            alert(response.message);
+            navigation.navigate('Login');
+        } else {
+            alert(response.message);
+        }
+    };
+    
+
+    useEffect(() => {
+        inputRef.current && inputRef.current.focus();
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -24,6 +57,8 @@ const Register = () => {
                         <TextInput
                             style={styles.input}
                             keyboardType="email-address"
+                            value={email}
+                            onChangeText={setEmail}
                         />
                     </View>
 
@@ -34,6 +69,8 @@ const Register = () => {
                         <TextInput
                             style={styles.input}
                             keyboardType="name"
+                            value={fullName}
+                            onChangeText={setFullName}
                         />
                     </View>
 
@@ -43,51 +80,54 @@ const Register = () => {
                     <View style={styles.inputForm}>
                         <TextInput
                             style={styles.input}
-                            keyboardType="user"
+                            keyboardType="default"
+                            value={username}
+                            onChangeText={setUsername}
                         />
                     </View>
 
                     <View style={styles.flexColumn}>
-                        <Text style={styles.label}> Contraseña</Text>
+                        <Text style={styles.label}>Contraseña</Text>
                     </View>
                     <View style={styles.inputForm}>
                         <TextInput
                             style={styles.input}
                             secureTextEntry
+                            value={password}
+                            onChangeText={setPassword}
                         />
                     </View>
 
                     <View style={styles.flexColumn}>
-                        <Text style={styles.label}> Confirmar contraseña</Text>
+                        <Text style={styles.label}>Confirmar contraseña</Text>
                     </View>
                     <View style={styles.inputForm}>
                         <TextInput
                             style={styles.input}
                             secureTextEntry
+                            value={confirmPassword}
+                            onChangeText={setConfirmPassword}
                         />
                     </View>
-               
 
-                <LinearGradient
-                    colors={['#4158d0', '#c850c0', '#ffcc70']}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
-                    style={styles.buttonSubmit}
-                >
-                    <TouchableOpacity style={styles.buttonSubmitInner} onPress={() => navigation.navigate('Login')}>
-                        <Text style={styles.buttonSubmitText}>Registrate</Text>
-                    </TouchableOpacity>
-                </LinearGradient>
+                    <LinearGradient
+                        colors={['#4158d0', '#c850c0', '#ffcc70']}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        style={styles.buttonSubmit}
+                    >
+                        <TouchableOpacity style={styles.buttonSubmitInner} onPress={handleRegister}>
+                            <Text style={styles.buttonSubmitText}>Registrate</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
 
-                <Text style={styles.p}>
-                    ¿Ya tienes una cuenta?{' '}
-                    <Text style={styles.span} onPress={() => navigation.navigate('Login')}>Inicia sesión</Text>
-                </Text>
+                    <Text style={styles.p}>
+                        ¿Ya tienes una cuenta?{' '}
+                        <Text style={styles.span} onPress={() => navigation.navigate('Login')}>Inicia sesión</Text>
+                    </Text>
                 </ScrollView>
             </View>
-
-
-        </View >
+        </View>
     );
 }
 

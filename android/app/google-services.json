@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "909988710911",
+    "project_id": "blaze-842ad",
+    "storage_bucket": "blaze-842ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909988710911:android:4bac0a2568645ef780ffca",
+        "android_client_info": {
+          "package_name": "com.awesomeproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABTBB4Mnrre3fMcWCJmImn_0h9b3tAa_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
