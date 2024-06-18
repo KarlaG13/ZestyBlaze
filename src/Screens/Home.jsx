@@ -1,14 +1,24 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import Card from '../Components/Card';
 import Logo from '../Components/CustomCheckbox';
 import { useUser } from '../ZestyBlaze/Core/Infrastructure/Context/UserContext';
+import { GetPublicationsUseCase } from '../ZestyBlaze/Core/Modules/Auth/Applications/GetPublicationsUseCase'
 
 const Home = () => {
     const { userId, logout } = useUser();
+    const [publications, setPublications] = useState([]);
+
+    const getPublications = async () => {
+        const getPublicationsUseCase = new GetPublicationsUseCase();
+        const response = await getPublicationsUseCase.execute(userId);
+        if (response.status == 'success') {
+            setPublications(response.data);
+        }
+    }
 
     useEffect(() => {
-        console.log(userId);
+        getPublications()
     }, []);
 
     return (
@@ -18,11 +28,19 @@ const Home = () => {
                 <Text style={styles.texto}>ZestyBlaze</Text>
             </View>
             <ScrollView contentContainerStyle={styles.containerInf} showsVerticalScrollIndicator={false}>
-                <Card />
-               
-
-
-
+                {
+                    publications.map((item, index) => {
+                        return (
+                            <Card
+                                key={index}
+                                title={item.userName}
+                                description={item.description}
+                                img={item.imageUrl}
+                                date={item.date}
+                            />
+                        )
+                    })
+                }
             </ScrollView>
 
 

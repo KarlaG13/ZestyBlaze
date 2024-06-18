@@ -10,7 +10,8 @@ export const uploadImageToFirebase = async (selectedFile: any, userId: string): 
         const path = `images/${userId}/${name}`;
         const reference = storage().ref(path);
         const response = await reference.putFile(uri);
-        console.log(response);
+        const downloadURL = await reference.getDownloadURL();
+        return downloadURL;
     } catch (err) {
         console.log(err);
     }

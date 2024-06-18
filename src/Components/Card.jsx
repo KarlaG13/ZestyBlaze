@@ -7,10 +7,9 @@ const Card = (props) => {
 
     return (
         <View style={styles.container}>
-            
             <View style={styles.profileContainer}>
                 <Image
-                    source={require('../assets/young.jpg')} // Cambia la fuente según la imagen real
+                    source={require('../assets/young.jpg')}
                     style={styles.profileImage}
                     resizeMode="cover"
                 />
@@ -20,11 +19,12 @@ const Card = (props) => {
                 </View>
             </View>
 
-            <Text style={styles.description}  >{description}</Text>
+            <Text style={styles.description}>{description}</Text>
 
             <Image
-                source={img} // Cambia la fuente según la imagen real
+                source={{ uri: img }}
                 style={styles.publicationImage}
+                resizeMode="cover"
             />
 
             <TouchableOpacity style={styles.heartButton}>
@@ -56,15 +56,15 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 18,
         fontWeight: 'bold',
-        color:'black'
+        color: 'black',
     },
     date: {
         fontSize: 14,
         color: '#888',
     },
-    description:{
-        color:'black',
-        padding:3
+    description: {
+        color: 'black',
+        padding: 3,
     },
     publicationImage: {
         width: '100%',

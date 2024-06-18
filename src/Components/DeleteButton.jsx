@@ -1,10 +1,18 @@
 import React from 'react';
 import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
+
 
 const DeleteButton = () => {
+  const navigation = useNavigation();
+
+  const handleDelete = () => {
+    navigation.navigate('Menu');
+  };
+
   return (
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} onPress={handleDelete}>
       <Text style={styles.text}>Delete</Text>
       <View style={styles.icon}>
         <Icon name="delete" size={24} color="#eee" />

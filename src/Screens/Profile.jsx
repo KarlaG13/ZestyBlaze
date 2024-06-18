@@ -5,12 +5,14 @@ import IconGrid from 'react-native-vector-icons/Fontisto';
 import Card from '../Components/Card';
 import { FindUserByIdUseCase } from '../ZestyBlaze/Core/Modules/Auth/Applications/FindUserByIDUseCase';
 import { useUser } from '../ZestyBlaze/Core/Infrastructure/Context/UserContext';
+import { GetPublicationsByUserUseCase } from '../ZestyBlaze/Core/Modules/Auth/Applications/GetPublicationsByUserUseCase';  // Correct the import
 
 const Profile = () => {
     const { userId, logout } = useUser();
     const [name, setName] = useState('');
     const [userName, setUserName] = useState('');
     const [loading, setLoading] = useState(true);
+    const [publications, setPublications] = useState([]);
 
     useEffect(() => {
         const getProfile = async () => {
@@ -19,10 +21,9 @@ const Profile = () => {
                 const user = await useCase.execute(userId);
 
                 if (user) {
-                    setName(user.data.fullName || ''); // Assuming fullName is a string or can be safely defaulted to an empty string
-                    setUserName(user.data.userName || ''); // Assuming userName is a string or can be safely defaulted to an empty string
+                    setName(user.data.fullName || '');
+                    setUserName(user.data.userName || '');
                 } else {
-                    // Handle case where user is not found
                     console.log('Usuario no encontrado');
                 }
             } catch (error) {
@@ -32,11 +33,20 @@ const Profile = () => {
             }
         };
 
+        const getPublications = async () => {
+            const getPublicationsByUserUseCase = new GetPublicationsByUserUseCase();  // Correct the use case name
+            const response = await getPublicationsByUserUseCase.execute(userId);
+            if (response.status === 'success') {
+                setPublications(response.data);
+            }
+        };
+
         getProfile();
+        getPublications();
     }, [userId]);
 
     if (loading) {
-        return <Text>Cargando perfil...</Text>; // Mostrar un indicador de carga mientras se obtiene el perfil
+        return <Text>Cargando perfil...</Text>; 
     }
 
     return (
@@ -61,9 +71,15 @@ const Profile = () => {
                 <View style={styles.containerIconPublication}>
                     <IconGrid name="nav-icon-grid" size={30} color="#757575" />
                 </View>
-                <Card />
-                <Card />
-                <Card />
+                {publications.map((item, index) => (
+                    <Card
+                        key={index}
+                        title={item.userName}
+                        description={item.description}
+                        img={item.imageUrl}
+                        date={item.date}
+                    />
+                ))}
             </View>
         </ScrollView>
     );
@@ -103,7 +119,7 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '20%',
+        height: '7%',
     },
     containerIconPublication: {
         borderBottomWidth: 1,
